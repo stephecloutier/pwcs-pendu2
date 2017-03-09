@@ -81,7 +81,7 @@ function getWord()
     $req = 'SELECT word FROM pendu.words ORDER BY RAND() LIMIT 1';
     $pdoSt = $dbPendu->query($req);
 
-    return strtolower($pdoSt->fetch(PDO::FETCH_COLUMN,0));
+    return strtolower($pdoSt->fetchColumn());
 }
 
 /**
