@@ -56,32 +56,38 @@ function getWordsArray()
 
 function connectDB()
 {
-    $cnxDatas = parse_ini_file(INI_FILE);
+    $dsn = '';
+    $db_config = ['DB_USER' => '', 'DB_PASS' => ''];
 
-    $dsn = sprintf('mysql:dbname=%s;host=%s', $cnxDatas['DB_NAME'], $cnxDatas['DB_HOST']);
+    if(file_exists(INI_FILE)){
+        $db_config = parse_ini_file(INI_FILE);
+        $dsn = sprintf('mysql:dbname=%s;host=%s', $db_config['DB_NAME'], $db_config['DB_HOST']);
+    }
 
     try {
-        $dbPendu = new PDO($dsn, $cnxDatas['DB_USER'], $cnxDatas['DB_PASS']);
+        return new PDO($dsn, $db_config['DB_USER'], $db_config['DB_PASS']);
     }
-    catch(PDOException $cnxError){
+    catch(PDOException $exception){
         return false;
     }
-
-    return $dbPendu;
 }
 
 function getWord()
 {
     $dbPendu = connectDB();
-    if(!$dbPendu) {
-        $wordsArray = getWordsArray();
-        return str_replace(' ', '', strtolower($wordsArray[rand(0, count($wordsArray) - 1)]));
+    if($dbPendu) {
+        $dbPendu->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try {
+            $req = 'SELECT word FROM pendu.words ORDER BY RAND() LIMIT 1';
+            $pdoSt = $dbPendu->query($req);
+
+            return strtolower($pdoSt->fetchColumn());
+        } catch(PDOException $error) {
+            echo 'file error connect';
+        }
     }
-
-    $req = 'SELECT word FROM pendu.words ORDER BY RAND() LIMIT 1';
-    $pdoSt = $dbPendu->query($req);
-
-    return strtolower($pdoSt->fetchColumn());
+    $wordsArray = getWordsArray();
+    return str_replace(' ', '', strtolower($wordsArray[rand(0, count($wordsArray) - 1)]));
 }
 
 /**
