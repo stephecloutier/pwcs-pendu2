@@ -34,7 +34,15 @@ $_SESSION['lettersArray'] = getLettersArray();
 /**
  * Le mot à trouver
  */
-$_SESSION['word'] = getWord();
+$_SESSION['word'] = strtolower($pdoSt->fetch(PDO::FETCH_COLUMN,0));
+
+
+/*if (!isset($cnxError)) {
+    $_SESSION['word'] = strtolower($pdoSt->fetch(PDO::FETCH_COLUMN,0));
+ } else {
+    $_SESSION['word'] = getWord();
+ }*/
+
 
 /**
  * Le nombre de lettres du mot

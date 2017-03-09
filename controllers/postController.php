@@ -33,3 +33,5 @@ if(!$letterFound){
     }
 }
 $_SESSION['remainingTrials'] = MAX_TRIALS - $_SESSION['trials'];
+
+
