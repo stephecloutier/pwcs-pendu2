@@ -8,20 +8,6 @@ session_start();
 *
 */
 
-$cnxDatas = parse_ini_file('DB.ini');
-
-$dsn = sprintf('mysql:dbname=%s;host=%s', $cnxDatas['DB_NAME'], $cnxDatas['DB_HOST']);
-
-try {
-    $cnx = new PDO($dsn, $cnxDatas['DB_USER'], $cnxDatas['DB_PASS']);
-}
-catch(PDOException $cnxError){
-die ($cnxError->getMessage());
-}
-
-$req = 'SELECT word FROM pendu.words ORDER BY RAND() LIMIT 1';
-$pdoSt = $cnx->query($req);
-
 
 if (file_exists(SOURCE_NAME)) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

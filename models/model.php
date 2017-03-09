@@ -53,10 +53,35 @@ function getWordsArray()
  *
  * @return string
  */
+
+function connectDB()
+{
+    $cnxDatas = parse_ini_file('DB.ini');
+
+    $dsn = sprintf('mysql:dbname=%s;host=%s', $cnxDatas['DB_NAME'], $cnxDatas['DB_HOST']);
+
+    try {
+        $dbPendu = new PDO($dsn, $cnxDatas['DB_USER'], $cnxDatas['DB_PASS']);
+    }
+    catch(PDOException $cnxError){
+        return false;
+    }
+
+    return $dbPendu;
+}
+
 function getWord()
 {
-    $wordsArray = getWordsArray();
-    return str_replace(' ', '', strtolower($wordsArray[rand(0, count($wordsArray) - 1)]));
+    $dbPendu = connectDB();
+    if(!$dbPendu) {
+        $wordsArray = getWordsArray();
+        return str_replace(' ', '', strtolower($wordsArray[rand(0, count($wordsArray) - 1)]));
+    }
+
+    $req = 'SELECT word FROM pendu.words ORDER BY RAND() LIMIT 1';
+    $pdoSt = $dbPendu->query($req);
+
+    return strtolower($pdoSt->fetch(PDO::FETCH_COLUMN,0));
 }
 
 /**
