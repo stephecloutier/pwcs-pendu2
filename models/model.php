@@ -56,7 +56,7 @@ function getWordsArray()
 
 function connectDB()
 {
-    $cnxDatas = parse_ini_file('DB.ini');
+    $cnxDatas = parse_ini_file(INI_FILE);
 
     $dsn = sprintf('mysql:dbname=%s;host=%s', $cnxDatas['DB_NAME'], $cnxDatas['DB_HOST']);
 

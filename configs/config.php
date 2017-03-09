@@ -15,4 +15,5 @@ define('SOURCE_NAME', 'datas/words.txt');
  */
 define('REPLACEMENT_CHAR', '*');
 
-//$cnxError = false;
+// Nom du fichier .ini
+define('INI_FILE', 'DB.ini');
