@@ -18,7 +18,8 @@ if (file_exists(SOURCE_NAME)) {
         die('Houla ! Qu’est-ce que tu fais avec cette méthode HTTP ?');
     }
 } else {
-    die('Houla ! le fichier contenant les mots à deviner ne semble pas exister…');
+    header('Location: views/error405.php');
+    //die('Houla ! le fichier contenant les mots à deviner ne semble pas exister…');
 }
 
 var_dump($_SESSION['word']);

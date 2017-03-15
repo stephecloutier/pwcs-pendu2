@@ -45,3 +45,12 @@ $_SESSION['lettersCount'] = strlen($_SESSION['word']);
  * La chaîne fantôme qui masque les lettres du mot avec un caractère de remplacement
  */
 $_SESSION['replacementString'] = getReplacementString($_SESSION['lettersCount']);
+
+/*$_SESSION['game'] = [
+  'username' => 'interface',
+    'trials' => 0,
+    'word' => strtoupper($_SESSION['word']),
+    'attempts' => 0
+];
+
+Faire une page de redirection qui redirige en GET*/
