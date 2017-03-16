@@ -19,10 +19,12 @@ if (file_exists(SOURCE_NAME)) {
     } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
         include 'controllers/getGameController.php';
     } else {
-        die('Houla ! Qu’est-ce que tu fais avec cette méthode HTTP ?');
+        header('Location: http://homestead.app/pwcs/pwcs-pendu2/errors/error405.php');
+        exit;
     }
 } else {
-    header('Location: views/error405.php');
+    header('Location: http://homestead.app/pwcs/pwcs-pendu2/errors/error_main.php');
+    exit;
 }
 
 //var_dump($_SESSION['word']);
