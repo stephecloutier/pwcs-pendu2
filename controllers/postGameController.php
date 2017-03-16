@@ -29,15 +29,15 @@ $letterFound = false;
 
 for ($i = 0; $i < $_SESSION['lettersCount']; $i++) {
     $l = substr($_SESSION['word'], $i, 1);
-    if($triedLetter === $l){
+    if ($triedLetter === $l){
         $letterFound = true;
         $_SESSION['replacementString'] = substr_replace($_SESSION['replacementString'],$l,$i,1);
     }
 }
-if(!$letterFound){
+if (!$letterFound){
     $_SESSION['trials']++;
-}else{
-    if($_SESSION['word'] === $_SESSION['replacementString']){
+} else {
+    if ($_SESSION['word'] === $_SESSION['replacementString']){
         $_SESSION['wordFound'] = true;
     }
 }
