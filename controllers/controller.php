@@ -11,7 +11,11 @@ session_start();
 
 if (file_exists(SOURCE_NAME)) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        include 'controllers/postGameController.php';
+        if(isset($_POST['email'])) {
+            include 'controllers/postPlayerController.php';
+        } else {
+            include 'controllers/postGameController.php';
+        }
     } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
         include 'controllers/getGameController.php';
     } else {
