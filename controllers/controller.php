@@ -19,7 +19,6 @@ if (file_exists(SOURCE_NAME)) {
     }
 } else {
     header('Location: views/error405.php');
-    //die('Houla ! le fichier contenant les mots à deviner ne semble pas exister…');
 }
 
-var_dump($_SESSION['word']);
+//var_dump($_SESSION['word']);

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Le pendu avec sessions</title>
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
 <div>
@@ -12,7 +13,7 @@
     <p>Le mot à deviner compte <?= $_SESSION['lettersCount']; ?>
         lettres&nbsp;: <?= $_SESSION['replacementString']; ?></p>
 </div>
-<div>
+<div id="images">
     <img src="images/pendu<?= $_SESSION['trials']; ?>.gif"
          alt="">
 </div>
