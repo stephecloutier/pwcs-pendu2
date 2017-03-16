@@ -104,5 +104,13 @@ function getReplacementString($lettersCount)
 
 function initGame()
 {
-    echo 'Fais la fonction initGame()';
+    $_SESSION['wordFound'] = false;
+    $_SESSION['remainingTrials'] = MAX_TRIALS;
+    $_SESSION['trials'] = 0;
+    $_SESSION['triedLetters'] = '';
+    $_SESSION['lettersArray'] = getLettersArray();
+    $_SESSION['word'] = getWord();
+    $_SESSION['lettersCount'] = strlen($_SESSION['word']);
+    $_SESSION['replacementString'] = getReplacementString($_SESSION['lettersCount']);
+    $_SESSION['attempts'] = 0;
 }
