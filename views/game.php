@@ -27,9 +27,10 @@
             «&nbsp;<b><?= $_SESSION['word']; ?></b>&nbsp;». <a href="index.php">Recommence&nbsp;!</a>
         </p>
     </div>
+    <?php include('views/partials/_gamesCount.php')  ?>
 <?php elseif ($_SESSION['remainingTrials'] == 0): ?>
     <div>
-        <p class="bg-danger lead">OOOps&nbsp;! Tu sembles bien mort&nbsp;! Le mot à trouver était «&nbsp;<b><?= $_SESSION['word']; ?></b>&nbsp;». <a href="index.php">Recommence&nbsp;!</a>
+        <p class="bg-danger lead">Ooops&nbsp;! Tu sembles bien mort&nbsp;! Le mot à trouver était «&nbsp;<b><?= $_SESSION['word']; ?></b>&nbsp;». <a href="index.php">Recommence&nbsp;!</a>
         </p>
     </div>
 <?php else: ?>

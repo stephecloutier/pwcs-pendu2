@@ -44,3 +44,16 @@ if (!$letterFound){
 $_SESSION['remainingTrials'] = MAX_TRIALS - $_SESSION['trials'];
 
 
+$gamesCount = '';
+
+if ($_SESSION['email']) {
+    if ($_SESSION['wordFound'] || !$_SESSION['remainingTrials']) {
+        saveGame();
+        $gamesCount = getGamesCountForCurrentPlayer();
+        if ($gamesCount) {
+            $gamesWon = getGamesWonForCurrentPlayer();
+        }
+    }
+}
+
+$view = 'views/game.php';

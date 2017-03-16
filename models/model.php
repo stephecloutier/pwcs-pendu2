@@ -114,3 +114,19 @@ function initGame()
     $_SESSION['replacementString'] = getReplacementString($_SESSION['lettersCount']);
     $_SESSION['attempts'] = 0;
 }
+
+function saveGame()
+{
+    echo 'Fais la fonction saveGame()';
+}
+
+function getGamesCountForCurrentPlayer()
+{
+    echo 'Fais la fonction getGamesCountForCurrentPlayer()';
+}
+
+function getGamesWonForCurrentPlayer()
+{
+    echo 'Fais la fonction getGamesWonForCurrentPlayer()';
+}
+
