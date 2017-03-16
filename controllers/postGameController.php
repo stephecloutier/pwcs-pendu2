@@ -3,8 +3,16 @@
 /**
  * La lettre qui vient d’être essayée
  */
-$triedLetter = (ctype_alpha($_POST['triedLetter'])&&strlen($_POST['triedLetter'])===1)?$_POST['triedLetter']:'';
-if(!$triedLetter) die('Houla, vous n’avez pas essayé une lettre…');
+
+$_SESSION['attempts']++;
+
+$triedLetter = (ctype_alpha($_POST['triedLetter']) && strlen($_POST['triedLetter'])===1)?$_POST['triedLetter']:'';
+
+if(!$triedLetter) {
+    header('Location: http://homestead.app/pwcs/pwcs-pendu2/errors/error_main.php');
+    exit;
+    //die('Houla, vous n’avez pas essayé une lettre…');
+}
 
 /**
  * Modification de la chaîne des lettres déjà essayées
@@ -18,6 +26,7 @@ $_SESSION['triedLetters'] .= $triedLetter;
 $_SESSION['lettersArray'][$triedLetter] = false;
 
 $letterFound = false;
+
 for ($i = 0; $i < $_SESSION['lettersCount']; $i++) {
     $l = substr($_SESSION['word'], $i, 1);
     if($triedLetter === $l){
