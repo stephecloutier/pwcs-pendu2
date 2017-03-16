@@ -9,7 +9,7 @@ session_start();
 */
 
 
-if (file_exists(SOURCE_NAME)) {
+if (file_exists(INI_FILE) || file_exists(SOURCE_NAME)) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if(isset($_POST['email'])) {
             include 'controllers/postPlayerController.php';

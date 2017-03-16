@@ -101,3 +101,8 @@ function getReplacementString($lettersCount)
 {
     return str_pad('', $lettersCount, REPLACEMENT_CHAR);
 }
+
+function initGame()
+{
+    echo 'Fais la fonction initGame()';
+}
