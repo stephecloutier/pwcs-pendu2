@@ -32,6 +32,7 @@
     <div>
         <p class="bg-danger lead">Ooops&nbsp;! Tu sembles bien mort&nbsp;! Le mot à trouver était «&nbsp;<b><?= $_SESSION['word']; ?></b>&nbsp;». <a href="index.php">Recommence&nbsp;!</a>
         </p>
+        <?php include('views/partials/_gamesCount.php')  ?>
     </div>
 <?php else: ?>
     <form action="index.php"

@@ -65,7 +65,15 @@ function connectDB()
     }
 
     try {
-        return new PDO($dsn, $db_config['DB_USER'], $db_config['DB_PASS']);
+        return new PDO(
+            $dsn,
+            $db_config['DB_USER'],
+            $db_config['DB_PASS'],
+            [
+              PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+              PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            ]
+        );
     }
     catch(PDOException $exception){
         return false;
@@ -117,16 +125,58 @@ function initGame()
 
 function saveGame()
 {
-    echo 'Fais la fonction saveGame()';
+    $pdo = connectDB();
+    if ($pdo) {
+        $sql = 'INSERT INTO pendu.games(`username`, `trials`, `word`, `attempts`) VALUES (:email, :trials, :word, :attempts)';
+        try {
+            $pdoSt = $pdo->prepare($sql);
+            $pdoSt->execute([
+                ':email' => $_SESSION['email'],
+                ':trials' => $_SESSION['trials'],
+                ':word' => $_SESSION['word'],
+                ':attempts' => $_SESSION['attempts'],
+            ]);
+        } catch(PDOException $e) {
+            die('Quelque chose a posé problème lors de l\'enregistrement');
+        }
+    } else {
+        die('Quelque chose a posé problème lors de l\'enregistrement');
+    }
 }
 
 function getGamesCountForCurrentPlayer()
 {
-    echo 'Fais la fonction getGamesCountForCurrentPlayer()';
+    $pdo = connectDB();
+    if ($pdo) {
+        $sql = sprintf('SELECT COUNT(*) FROM pendu.games WHERE username = \'%s\'', $_SESSION['email']);
+        try {
+            $pdoSt = $pdo->query($sql);
+            return $pdoSt->fetchColumn();
+        } catch (PDOException $e) {
+            return '';
+        }
+    } else {
+        die('Quelque chose a posé problème lors de la récupération du nombre de parties');
+    }
 }
 
 function getGamesWonForCurrentPlayer()
 {
-    echo 'Fais la fonction getGamesWonForCurrentPlayer()';
+    $pdo = connectDB();
+    if ($pdo) {
+        $sql = sprintf(
+            'SELECT COUNT(*) FROM pendu.games WHERE username = \'%s\' AND trials < \'%s\'',
+            $_SESSION['email'],
+            MAX_TRIALS
+        );
+        try {
+            $pdoSt = $pdo->query($sql);
+            return $pdoSt->fetchColumn();
+        } catch (PDOException $e) {
+            return '';
+        }
+    } else {
+        die('Quelque chose a posé problème lors de la récupération du nombre de parties gagnées');
+    }
 }
 
