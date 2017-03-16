@@ -11,9 +11,9 @@ session_start();
 
 if (file_exists(SOURCE_NAME)) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        include 'controllers/postController.php';
+        include 'controllers/postGameController.php';
     } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        include 'controllers/geController.php';
+        include 'controllers/getGameController.php';
     } else {
         die('Houla ! Qu’est-ce que tu fais avec cette méthode HTTP ?');
     }
