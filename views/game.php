@@ -1,11 +1,3 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Le pendu avec sessions</title>
-    <link rel="stylesheet" href="styles/styles.css">
-</head>
-<body>
 <div>
     <h1>Trouve le mot en moins de <?= MAX_TRIALS; ?> coups !</h1>
 </div>
@@ -58,5 +50,3 @@
         </fieldset>
     </form>
 <?php endif; ?>
-</body>
-</html>
