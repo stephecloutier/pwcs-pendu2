@@ -4,6 +4,13 @@
  * La lettre qui vient d’être essayée
  */
 
+
+function init()
+{
+    $_SESSION['email'] = $_SESSION['email']??'';
+    return ['view' => 'views/player.php'];
+}
+
 function check()
 {
     $_SESSION['attempts']++;

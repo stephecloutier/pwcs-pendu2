@@ -6,11 +6,6 @@
  * Time: 09:02
  */
 
-function init()
-{
-    $_SESSION['email'] = $_SESSION['email']??'';
-    return ['view' => 'views/player.php'];
-}
 
 function register()
 {
