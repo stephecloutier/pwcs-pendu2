@@ -24,5 +24,5 @@ if (!in_array($method . '/' . $a . '/' . $r, $routes)) {
 }
 
 $controllerFile = $r . 'Controller.php';
-require 'controllers/' . $controllerFile;
+require 'Controller/' . $controllerFile;
 $data = call_user_func($a);

@@ -1,0 +1,10 @@
+{
+    "name": "root/pwcs-pendu2",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Controller\\": "Controller/",
+            "Model\\": "Model/"
+        }
+    }
+}
