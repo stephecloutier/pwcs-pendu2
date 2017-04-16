@@ -9,9 +9,9 @@
 namespace Model;
 
 class Player extends Model {
-    public function getGamesCountForCurrentPlayer()
+    public function getGamesCount()
     {
-        $pdo = connectDB();
+        $pdo = $this->connectDB();
         if ($pdo) {
             $sql = sprintf('SELECT COUNT(*) FROM pendu.games WHERE username = \'%s\'', $_SESSION['email']);
             try {
@@ -25,9 +25,9 @@ class Player extends Model {
         }
     }
 
-    public function getGamesWonForCurrentPlayer()
+    public function getGamesWon()
     {
-        $pdo = connectDB();
+        $pdo = $this->connectDB();
         if ($pdo) {
             $sql = sprintf(
                 'SELECT COUNT(*) FROM pendu.games WHERE username = \'%s\' AND trials < \'%s\'',

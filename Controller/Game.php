@@ -2,6 +2,9 @@
 
 namespace Controller;
 
+use \Model\Game as GameModel;
+use \Model\Player as PlayerModel;
+
 class Game {
     public function init()
     {
@@ -11,9 +14,6 @@ class Game {
 
     public function check()
     {
-        include 'Model/Game.php';
-        include 'Model/Player.php';
-
         $_SESSION['attempts']++;
 
         $triedLetter = (ctype_alpha($_POST['triedLetter']) && strlen($_POST['triedLetter'])===1)?$_POST['triedLetter']:'';
@@ -56,11 +56,13 @@ class Game {
         $gamesCount = '';
 
         if ($_SESSION['email']) {
+            $gameModel = new GameModel();
+            $playerModel = new PlayerModel();
             if ($_SESSION['wordFound'] || !$_SESSION['remainingTrials']) {
-                saveGame();
-                $gamesCount = getGamesCountForCurrentPlayer();
+                $gameModel->saveGame();
+                $gamesCount = $playerModel->getGamesCount();
                 if ($gamesCount) {
-                    $gamesWon = getGamesWonForCurrentPlayer();
+                    $gamesWon = $playerModel->getGamesWon();
                 }
             }
         }

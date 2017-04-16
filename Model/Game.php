@@ -47,7 +47,7 @@ class Game extends Model {
 
     public function getWord()
     {
-        $dbPendu = connectDB();
+        $dbPendu = $this->connectDB();
         if($dbPendu) {
             $dbPendu->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
             try {
@@ -59,7 +59,7 @@ class Game extends Model {
                 echo 'file error connect';
             }
         }
-        $wordsArray = getWordsArray();
+        $wordsArray = $this->getWordsArray();
         return str_replace(' ', '', strtolower($wordsArray[rand(0, count($wordsArray) - 1)]));
     }
 
@@ -74,16 +74,16 @@ class Game extends Model {
         $_SESSION['remainingTrials'] = MAX_TRIALS;
         $_SESSION['trials'] = 0;
         $_SESSION['triedLetters'] = '';
-        $_SESSION['lettersArray'] = getLettersArray();
-        $_SESSION['word'] = getWord();
+        $_SESSION['lettersArray'] = $this->getLettersArray();
+        $_SESSION['word'] = $this->getWord();
         $_SESSION['lettersCount'] = strlen($_SESSION['word']);
-        $_SESSION['replacementString'] = getReplacementString($_SESSION['lettersCount']);
+        $_SESSION['replacementString'] = $this->getReplacementString($_SESSION['lettersCount']);
         $_SESSION['attempts'] = 0;
     }
 
     function saveGame()
     {
-        $pdo = connectDB();
+        $pdo = $this->connectDB();
         if ($pdo) {
             $sql = 'INSERT INTO pendu.games(`username`, `trials`, `word`, `attempts`) VALUES (:email, :trials, :word, :attempts)';
             try {

@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Stephe
- * Date: 16/03/17
- * Time: 11:46
- */
+
 session_start();
 
 if(!file_exists(INI_FILE) && !file_exists(SOURCE_NAME)) {
@@ -23,6 +18,8 @@ if (!in_array($method . '/' . $a . '/' . $r, $routes)) {
     die('ce que vous cherchez n’est pas ici');
 }
 
-$controllerFile = $r . 'Controller.php';
-require 'Controller/' . $controllerFile;
-$data = call_user_func($a);
+
+$controllerName = 'Controller\\' . ucfirst($r);
+$controller = new $controllerName();
+
+$data = call_user_func([$controller, $a]);

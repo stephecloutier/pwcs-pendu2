@@ -8,18 +8,17 @@
 
 namespace Controller;
 
+use \Model\Game as GameModel;
+
 class Player {
     public function register()
     {
-        include 'Model/Game.php';
-        include 'Model/Player.php';
-
         $view = 'views/game.php';
         $_SESSION['errors'] = [];
+        $gameModel = new GameModel();
         if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $_SESSION['email'] = $_POST['email'];
-            //include 'Model/Model.php';
-            initGame();
+            $gameModel -> initGame();
         } else {
             if (!empty($_POST['email'])) {
                 $_SESSION['errors'] = [
@@ -30,7 +29,7 @@ class Player {
             } else {
                 //Le joueur ne souhaite pas qu'on mémorise sa partie
                 $_SESSION['email'] = '';
-                initGame();
+                $gameModel -> initGame();
             }
         }
 
