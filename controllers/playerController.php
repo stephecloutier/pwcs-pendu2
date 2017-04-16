@@ -9,6 +9,9 @@
 
 function register()
 {
+    include 'models/gameModel.php';
+    include 'models/playerModel.php';
+
     $view = 'views/game.php';
     $_SESSION['errors'] = [];
     if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {

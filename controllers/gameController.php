@@ -1,10 +1,5 @@
 <?php
 
-/**
- * La lettre qui vient d’être essayée
- */
-
-
 function init()
 {
     $_SESSION['email'] = $_SESSION['email']??'';
@@ -13,6 +8,9 @@ function init()
 
 function check()
 {
+    include 'models/gameModel.php';
+    include 'models/playerModel.php';
+
     $_SESSION['attempts']++;
 
     $triedLetter = (ctype_alpha($_POST['triedLetter']) && strlen($_POST['triedLetter'])===1)?$_POST['triedLetter']:'';
